@@ -3,12 +3,14 @@ import { useAppDispatch, useAppSelector } from "./redux/store";
 import { loadBlockchain } from "./redux/slices/web3ConnectSlice";
 import "./App.css";
 import { petsData } from "./data";
+import { Button } from 'react-bootstrap';
+
 
 function App() {
   //use states
   const [adopters, setAdopters] = useState();
 
-  const empyAddress = "0x0000000000000000000000000000000000000000";
+  const emptyAddress = "0x0000000000000000000000000000000000000000";
   const dispatch = useAppDispatch();
   const { web3, accounts, contract } = useAppSelector(
     (state) => state.web3Connect
@@ -60,7 +62,7 @@ function App() {
             <p>Breed: {data?.breed}</p>
             <p>Location: {data?.location}</p>
             {
-              adopters[index] === empyAddress ?
+              adopters[index] === emptyAddress ?
               <button onClick={() => adoptPet(index)}>
                 Adopt
               </button>
@@ -71,12 +73,13 @@ function App() {
           </div>
         </>) : ""}</>
       ) : (
-        <>
-          <button onClick={() => handleMetamask()}>Connect Metamask</button>
+        <div className="starter">
+       
+          <button onClick={() => handleMetamask()} className="btnConnect">Connect Metamask</button>
           <br />
           <br />
           <br />
-        </>
+        </div>
       )}
     </div>
   );
